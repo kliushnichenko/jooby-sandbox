@@ -15,4 +15,9 @@ public class ControllerV1 {
   public String sayHi() {
     return welcomeService.welcome("v1");
   }
+
+  @GET("/should-not-be-duplicated-under-v2")
+  public String demo() {
+    return welcomeService.welcome("v1");
+  }
 }

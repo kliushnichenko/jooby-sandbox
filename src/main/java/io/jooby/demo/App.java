@@ -1,6 +1,7 @@
 package io.jooby.demo;
 
 import io.jooby.Jooby;
+import io.jooby.OpenAPIModule;
 import io.jooby.demo.v1.ControllersAppV1;
 import io.jooby.demo.v2.ControllersAppV2;
 import io.jooby.di.GuiceModule;
@@ -9,6 +10,7 @@ public class App extends Jooby {
 
     {
         install(new GuiceModule());
+        install(new OpenAPIModule());
 
         mvc(HealthController.class);
 
