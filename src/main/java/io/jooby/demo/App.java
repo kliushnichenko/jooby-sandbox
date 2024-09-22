@@ -1,21 +1,17 @@
 package io.jooby.demo;
 
+import io.avaje.validation.Validator;
 import io.jooby.Jooby;
-import io.jooby.OpenAPIModule;
-import io.jooby.demo.v1.ControllersAppV1;
-import io.jooby.demo.v2.ControllersAppV2;
-import io.jooby.di.GuiceModule;
 
 public class App extends Jooby {
 
+    private final Validator validator = Validator.builder().build();
+
     {
-        install(new GuiceModule());
-        install(new OpenAPIModule());
-
-        mvc(HealthController.class);
-
-        mount("/api/v1", new ControllersAppV1());
-        mount("/api/v2", new ControllersAppV2());
+        onStarted(() -> {
+            var pet = new Pet();
+            validator.validate(pet);
+        });
     }
 
     public static void main(final String[] args) {
